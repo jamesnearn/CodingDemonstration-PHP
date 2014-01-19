@@ -33,51 +33,54 @@
 		}
 
 		function test_HasValidEmail() {
-			$test = new User();
-			$test->email = 'user@domain.com';
-			if ($test->hasvalidemail()) {
-				echo 'PASS: User->HasValidEmail(), test #1<br />';
-			} else {
-				echo 'FAIL: User->HasValidEmail(), test #1<br />';
-			}
+			//list of bad emails from http://en.wikipedia.org/wiki/Email_address
 
-			$test->email = 'user';
-			if ($test->HasValidEmail()) {
-				echo 'FAIL: User->HasValidEmail(), test #2<br />';
-			} else {
-				echo 'PASS: User->HasValidEmail(), test #2<br />';
-			}
-
-			$test->email = 'domain.com';
-			if ($test->HasValidEmail()) {
-				echo 'FAIL: User->HasValidEmail(), test #3<br />';
-			} else {
-				echo 'PASS: User->HasValidEmail(), test #3<br />';
+			$list = array(
+				'user@domain.com',	//valid
+				'',
+				'user',
+				'domain.com',
+				'Abc.example.com',
+				'A@b@c@example.com',
+				'a"b(c)d,e:f;g<h>i[j\k]l@example.com',
+				'just"not"right@example.com',
+				'this is"not\allowed@example.com',
+				'this\ still\"not\\allowed@example.com'
+			);
+			
+			$testIndex = 0;
+			foreach ($list as $email) {
+				$test = new User();
+				$test->email = $email;
+				if ($test->HasValidEmail()) {
+					echo 'FAIL: User->HasValidEmail(), test #' . $testIndex . '<br />';
+				} else {
+					echo 'PASS: User->HasValidEmail(), test #' . $testIndex . '<br />';
+				}
+				$testIndex++;
 			}
 		}
 		
 		function test_HasValidPassword() {
-			$test = new User();
-
-			$test->password = 'password1$';
-			if ($test->HasValidPassword()) {
-				echo "PASS: User_UnitTest->test_HasValidPassword(), test #1<br />"; 
-			} else {
-				echo "FAIL: User_UnitTest->test_HasValidPassword(), test #1<br />"; 
-			}
-
-			$test->password = 'password';
-			if ($test->HasValidPassword()) {
-				echo "FAIL: User_UnitTest->test_HasValidPassword(), test #2<br />"; 
-			} else {
-				echo "PASS: User_UnitTest->test_HasValidPassword(), test #2<br />"; 
-			}
-
-			$test->password = 'password1';
-			if ($test->HasValidPassword()) {
-				echo "FAIL: User_UnitTest->test_HasValidPassword(), test #3<br />"; 
-			} else {
-				echo "PASS: User_UnitTest->test_HasValidPassword(), test #3<br />"; 
+			$list = array(
+			'password1$',	//valid
+			'',
+			'password',
+			'password1',
+			'p@ssword!',
+			'pass1!',
+			);
+			
+			$testIndex = 0;
+			foreach($list as $password) {
+				$test = new User();
+				$test->password = $password;
+				if ($test->HasValidPassword()) {
+					echo 'FAIL: User_UnitTest->test_HasValidPassword(), test #' . $testIndex . '<br />';
+				} else {
+					echo 'PASS: User_UnitTest->test_HasValidPassword(), test #' . $testIndex . '<br />'; 
+				}
+				$testIndex++;
 			}
 		}
 	}

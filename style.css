@@ -5,30 +5,37 @@
 	margin: 10px;
 }
 
-.title {
+.box {
+	width: 200px;	/* default value to be overridden later */
+}
+
+.box .title {
 	padding: 3px;
-}
-
-.content {
-	padding: 3px;
-}
-
-.contentItem {
-	margin-bottom: 5px;
-}
-
-
-
-.login {
-	width: 200px;
-}
-
-.login .title {
 	border-bottom: solid 1px gray;
 }
 
-.login .content  .email,
-.login .content  .password
-{
-	width: 100%;
+.box .content {
+	padding: 3px;
 }
+
+.box .contentItem {
+	margin-bottom: 5px;
+}
+
+#header {
+	color: white;
+	background-color: gray;
+}
+
+#header #companyName {
+	padding-left: 25px;
+	font-size: 200%;
+	font-weight: bold;
+	padding-right: 25px;
+}
+
+#header .navLink {
+	color: #d0d0d0;
+	font-size: 125%;
+}
+
