@@ -37,5 +37,15 @@
 #header .navLink {
 	color: #d0d0d0;
 	font-size: 125%;
+	background-color: white;
+	padding: 3px 5px 10px 5px;
+	border-radius: 5px 5px 0px 0px;
+	border-bottom: solid 1px white;
 }
 
+#footer {
+	border-top: solid 1px gray;
+	text-align: right;
+	font-size: smaller;
+	color: #d0d0d0;
+}

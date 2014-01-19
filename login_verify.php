@@ -36,8 +36,6 @@
 	$checkCredentials = new CheckCredentials;
 	$checkCredentials->LoadPostVariables();
 ?>
-
-
 <?php ob_start(); ?>
 
 	<div class="box">
