@@ -7,7 +7,8 @@
 		function HasValidEmail() {
 			//Have a php class that checks for valid email address and password. 
 			// http://stackoverflow.com/questions/12026842/how-to-validate-an-email-address-in-php
-			return filter_var($this->email, FILTER_VALIDATE_EMAIL);
+			if ($this->email == '') return false;
+			return filter_var($this->email, FILTER_VALIDATE_EMAIL) == $this->email;
 		}
 		
 		function HasValidPassword() {
@@ -36,26 +37,34 @@
 			//list of bad emails from http://en.wikipedia.org/wiki/Email_address
 
 			$list = array(
-				'user@domain.com',	//valid
-				'',
-				'user',
-				'domain.com',
-				'Abc.example.com',
-				'A@b@c@example.com',
-				'a"b(c)d,e:f;g<h>i[j\k]l@example.com',
-				'just"not"right@example.com',
-				'this is"not\allowed@example.com',
-				'this\ still\"not\\allowed@example.com'
+				array('valid',   'user@domain.com'),
+				array('invalid', ''),
+				array('invalid', 'user'),
+				array('invalid', 'domain.com'),
+				array('invalid', 'Abc.example.com'),
+				array('invalid', 'A@b@c@example.com'),
+				array('invalid', 'a"b(c)d,e:f;g<h>i[j\k]l@example.com'),
+				array('invalid', 'just"not"right@example.com'),
+				array('invalid', 'this is"not\allowed@example.com'),
+				array('invalid', 'this\ still\"not\\allowed@example.com', 'invalid')
 			);
 			
 			$testIndex = 0;
-			foreach ($list as $email) {
+			foreach ($list as $testcase) {
 				$test = new User();
-				$test->email = $email;
-				if ($test->HasValidEmail()) {
-					echo 'FAIL: User->HasValidEmail(), test #' . $testIndex . '<br />';
-				} else {
+				$test->email = $testcase[1];
+
+				// invert results if testcase is expected to be invalid by multiplying the negative of the test results
+				// if testcase expects invalid results.... return 1... 
+				$IfInvalidThisIsOne = ($testcase[0] == 'invalid'); 
+
+				// if false, subtract... -1 is true also
+				$results = $test->HasValidEmail() - $IfInvalidThisIsOne;
+
+				if ($results) {
 					echo 'PASS: User->HasValidEmail(), test #' . $testIndex . '<br />';
+				} else {
+					echo 'FAIL: User->HasValidEmail(), test #' . $testIndex . '<br />';
 				}
 				$testIndex++;
 			}
@@ -63,22 +72,33 @@
 		
 		function test_HasValidPassword() {
 			$list = array(
-			'password1$',	//valid
-			'',
-			'password',
-			'password1',
-			'p@ssword!',
-			'pass1!',
+				array('valid',   'password1$'),
+				array('valid',   'password123$'),
+				array('valid',   'password1$@%'),
+				array('valid',   'password123$#$%'),
+				array('invalid', ''),
+				array('invalid', 'password'),
+				array('invalid', 'password1'),
+				array('invalid', 'p@ssword!'),
+				array('invalid', 'pass1!'),
 			);
 			
 			$testIndex = 0;
-			foreach($list as $password) {
+			foreach($list as $testcase) {
 				$test = new User();
-				$test->password = $password;
-				if ($test->HasValidPassword()) {
-					echo 'FAIL: User_UnitTest->test_HasValidPassword(), test #' . $testIndex . '<br />';
+				$test->password = $testcase[1];
+
+				// invert results if testcase is expected to be invalid by multiplying the negative of the test results
+				// if testcase expects invalid results.... return 1... 
+				$IfInvalidThisIsOne = ($testcase[0] == 'invalid'); 
+
+				// if false, subtract... -1 is true also
+				$results = $test->HasValidPassword() - $IfInvalidThisIsOne;
+
+				if ($results) {
+					echo 'PASS: User_UnitTest->test_HasValidPassword(), test #' . $testIndex . '<br />';
 				} else {
-					echo 'PASS: User_UnitTest->test_HasValidPassword(), test #' . $testIndex . '<br />'; 
+					echo 'FAIL: User_UnitTest->test_HasValidPassword(), test #' . $testIndex . '<br />'; 
 				}
 				$testIndex++;
 			}
