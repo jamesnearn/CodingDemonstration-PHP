@@ -44,8 +44,10 @@
 }
 
 #footer {
-	border-top: solid 1px gray;
+	border-top: solid 1px #d0d0d0;
 	text-align: right;
 	font-size: smaller;
 	color: #d0d0d0;
+	margin-top: 20px;
+	padding-right: 5px;
 }

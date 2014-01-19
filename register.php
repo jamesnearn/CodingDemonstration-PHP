@@ -1,17 +1,17 @@
 <?php ob_start(); ?>
 
 	<style>
-		.login .content .email,
-		.login .content .password
+		.register .content .email,
+		.register .content .password
 		{
 			width: 100%;
 		}
 	</style>
 <?php $localCss = ob_get_clean(); ?>
 
-	<form method="post" action="login_verify.php">
-		<div class="box login">
-			<div class="title">Please log in to continue:</div>
+	<form method="post" action="register_verify.php">
+		<div class="box register">
+			<div class="title">Welcome!  Please register:</div>
 			<div class="content">
 				<div class="contentItem">
 					<div>Email:</div>
@@ -28,6 +28,6 @@
 <?php $maincontent = ob_get_clean(); ?>
 
 <?php
-	$pagetitle = "Login";
+	$pagetitle = "Register";
 	include("_template.php");
 ?>

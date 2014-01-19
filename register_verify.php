@@ -1,7 +1,7 @@
 <?php 
 	require 'User.php';
 	
-	class checkCredentials {
+	class verifyRegistration {
 		public $user;
 		
 		function LoadPostVariables() {
@@ -33,26 +33,26 @@
 		}
 	}
 	
-	$checkCredentials = new CheckCredentials;
-	$checkCredentials->LoadPostVariables();
+	$verifyRegistration = new verifyRegistration;
+	$verifyRegistration->LoadPostVariables();
 ?>
 <?php ob_start(); ?>
 
 	<div class="box">
-		<div class="title">Credential Requirements:</div>
+		<div class="title">Registration verification:</div>
 		<div class="content">
 			<div class="contentItem">
-				Email: <?php echo $checkCredentials->ValidateEmailFormat(); ?>
+				Email: <?php echo $verifyRegistration->ValidateEmailFormat(); ?>
 			</div>
 			
 			<div class="contentItem">
-				Password: <?php echo $checkCredentials->ValidatePasswordFormat(); ?>
-			</div>
+				Password: <?php echo $verifyRegistration->ValidatePasswordFormat(); ?>
+			</div>			
 		</div>
 	</div>
 <?php $maincontent = ob_get_clean(); ?>
 
 <?php
-	$pagetitle = "Login verification";
+	$pagetitle = "Register verification";
 	include("_template.php");
 ?>
