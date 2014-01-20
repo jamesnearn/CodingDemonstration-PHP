@@ -3,15 +3,18 @@
 	border: solid 1px gray;
 	border-radius: 5px;
 	margin: 10px;
-}
-
-.box {
 	width: 200px;	/* default value to be overridden later */
+	
+	/* fix cropping on borders due to title's background color */
+	/* http://stackoverflow.com/questions/6312067/border-radius-background-color-cropped-border */
+	overflow: hidden;	
 }
 
 .box .title {
 	padding: 3px;
 	border-bottom: solid 1px gray;
+	font-weight: bold;
+	background-color: #eeeeee;
 }
 
 .box .content {
@@ -35,7 +38,7 @@
 }
 
 #header .navLink {
-	color: #d0d0d0;
+	color: #42ABE2;
 	font-size: 125%;
 	background-color: white;
 	padding: 3px 5px 10px 5px;
